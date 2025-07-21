@@ -9,11 +9,18 @@ export default function Portfolio() {
                     </div>
                     <div className={"flex items-center gap-x-6"}>
                         <a href={"#home"} className={"hover:text-blue-500 transition-colors duration-300"}>홈</a>
-                        <a href={"#about"} className={"hover:text-blue-500 transition-colors"}>소개</a>
-                        <a href={"#skills"} className={"hover:text-blue-500 transition-colors"}>기술</a>
-                        <a href={"#project"} className={"hover:text-blue-500 transition-colors"}>프로젝트</a>
-                        <a href={"#contact"} className={"hover:text-blue-500 transition-colors"}>연락처</a>
-                        <button className={"p-2 w-10 h-10 rounded-full bg-gray-200 focus:outline-2 focus:outline-none focus:ring focus:ring-gray-500"}>
+                        <a href={"#about"} className={"hover:text-blue-500 transition-colors duration-300"}>소개</a>
+                        <a href={"#skills"} className={"hover:text-blue-500 transition-colors duration-300"}>기술</a>
+                        <a href={"#project"} className={"hover:text-blue-500 transition-colors duration-300"}>프로젝트</a>
+                        <a href={"#contact"} className={"hover:text-blue-500 transition-colors duration-300"}>연락처</a>
+                        {/* 다크 모드*/}
+                        <button
+                            className={
+                                "p-2 w-10 h-10 rounded-full bg-gray-200 " +
+                                "focus:outline-2 focus:outline-none focus:ring focus:ring-gray-500 " +
+                                "hover:scale-110 transition-transform duration-300"
+                            }
+                        >
                             <i className={"fas fa-moon text-2xl"}></i>
                         </button>
                     </div>
@@ -24,7 +31,7 @@ export default function Portfolio() {
                 <section id="home" className={"flex justify-between items-center mb-12"}>
                     <div className={"shrink-0 mr-10"}>
                         <img
-                            className={"w-48 h-48 rounded-full border-2 object-cover"}
+                            className={"w-48 h-48 rounded-full border-2 object-cover hover:scale-105 transition-transform duration-300"}
                             src="https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=Brian"
                             alt="avatar"
                         />
@@ -49,14 +56,14 @@ export default function Portfolio() {
                         <article className={"bg-gray-100 shadow-md rounded-lg p-6 hover:scale-105 transition-transform duration-300"}>
                             <h3 className={"text-xl font-semibold mb-1"}>🧑‍🎓교육 및 활동</h3>
                             <ul className={"text-gray-800 leading-relaxed"}>
-                                <li>👉 2024년 경주시 문제해결 해커톤 최우수상 수상</li>
-                                <li>👉 2022년.2024년 동국대학교 Developer 동아리에서 개발 및 기술 교육 활동 진행</li>
+                                <li>• 2024년 경주시 문제해결 해커톤 최우수상 수상</li>
+                                <li>• 동국대학교 개발 동아리 Developer 교육 진행(2024)</li>
                             </ul>
                         </article>
                         <article className={"bg-gray-100 shadow-md rounded-lg p-6 hover:scale-105 transition-transform duration-300"}>
                             <h3 className={"text-xl font-semibold mb-1"}>👨‍💻자격증</h3>
                             <ul className={"text-gray-800 leading-relaxed"}>
-                                <li>👉 2020 사회조사분석사 2급</li>
+                                <li>• 사회조사분석사 2급(2020)</li>
                             </ul>
                         </article>
                     </div>
@@ -80,11 +87,87 @@ export default function Portfolio() {
                         </div>
                     </div>
                 </section>
-                <section className={"bg-cyan-200 h-60"}>
+
+                {/* Project Section */}
+                <section id={"project"} className={"mb-16"}>
                     <h2 className={"text-3xl font-bold mb-6"}>프로젝트</h2>
+                    <div className={"grid grid-cols-2 gap-6"}>
+                        {[...Array(4)].map((_, idx) => (
+                            <article key={idx} className={"bg-gray-100 rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300"}>
+                                <img
+                                    className={"w-full h-48 object-cover"}
+                                    src={"https://plus.unsplash.com/premium_photo-1681566925294-7ff6eba5a9c2?q=80&w=600"}
+                                    alt={"플랫폼 이미지"}
+                                />
+                                <div className={"p-6"}>
+                                    <h3 className={"text-xl font-semibold mb-4 text-gray-800"}>
+                                        OOO 플랫폼
+                                    </h3>
+                                    <div className={"space-x-2 mb-4"}>
+                                        <span className={"bg-gray-200 text-xs text-gray-700 px-2 py-0.5 rounded-md border border-gray-300"}>Spring</span>
+                                        <span className={"bg-gray-200 text-xs text-gray-700 px-2 py-0.5 rounded-md border border-gray-300"}>React</span>
+                                        <span className={"bg-gray-200 text-xs text-gray-700 px-2 py-0.5 rounded-md border border-gray-300"}>MySql</span>
+                                    </div>
+                                    <div className={"space-x-2"}>
+                                        <a href={"#"} className={"bg-gray-800 text-sm text-white px-3 py-1 rounded-md"}>GitHub</a>
+                                        <a href={"#"} className={"bg-blue-600 text-sm text-white px-3 py-1 rounded-md"}>라이브 데모</a>
+                                    </div>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
                 </section>
-                <section className={"bg-green-200 h-60"}>
+                {/* Contact Section */}
+                <section id={"contact"} className={""}>
                     <h2 className={"text-3xl font-bold mb-6"}>연락처</h2>
+                    <div className={"grid grid-cols-2 gap-8"}>
+                        <form id={"contactForm"} className={"space-y-4"}>
+                            <div>
+                                <label htmlFor={"name"} className={"block mb-1 font-medium"}>이름</label>
+                                <input
+                                    type={"text"}
+                                    id={"name"}
+                                    name={"name"}
+                                    required={true}
+                                    className={"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-gray-500"}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor={"email"} className={"block mb-1 font-medium"}>이메일</label>
+                                <input
+                                    type={"email"}
+                                    id={"email"}
+                                    name={"email"}
+                                    className={"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-gray-500"}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor={"name"} className={"block mb-1 font-medium"}>메시지</label>
+                                <textarea
+                                    type={"text"}
+                                    id={"name"}
+                                    name={"name"}
+                                    required={true}
+                                    className={"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-gray-500"}
+                                />
+                            </div>
+                            <button type={"submit"} className={"bg-gray-500 text-white px-6 py-1.5 rounded-3xl hover:bg-gray-700 transition-colors duration-300"}>전송</button>
+                        </form>
+                        <div className={"flex flex-col items-center justify-center gap-y-2"}>
+                            <a href={"#"} target={"_blank"} className={"flex items-center space-x-2 text-gray-600 hover:text-blue-500 transition-colors duration-300"}>
+                                <i className={"fa-brands fa-github"}></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href={"#"} target={"_blank"} className={"flex items-center space-x-2 text-gray-600 hover:text-blue-500 transition-colors duration-300"}>
+                                <i className={"fa-regular fa-envelope"}></i>
+                                <span>wowddok99@gmail.com</span>
+                            </a>
+                            <a href={"#"} target={"_blank"} className={"flex items-center space-x-2 text-gray-600 hover:text-blue-500 transition-colors duration-300"}>
+                                <i className={"fa-solid fa-phone"}></i>
+                                <span>010-0000-0000</span>
+                            </a>
+                        </div>
+                    </div>
                 </section>
             </main>
             <footer className={"bg-gray-400 w-full h-20"}></footer>
