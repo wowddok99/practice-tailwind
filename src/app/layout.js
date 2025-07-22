@@ -26,6 +26,7 @@ export default function RootLayout({ children }) {
                 />
                 <style>
                     {`html { scroll-behavior: smooth; }`}
+                    {`[id] { scroll-margin-top: 64px; /* 원하는 여백 값으로 설정 */ }`}
                 </style>
             </head>
             <body>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function Portfolio() {
     const [isDark, setIsDark] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false)
 
     useEffect(() => {
         const darkSaved = localStorage.getItem("theme") === "dark";
@@ -29,21 +30,23 @@ export default function Portfolio() {
         });
     };
 
+    const toggleMenu = () => setMenuOpen(prev => !prev);
+
     return (
         <body className={"bg-white text-black min-h-screen transition-colors duration-300 dark:bg-gray-900 dark:text-white "}>
-            <header className={"sticky top-0 bg-opacity-90 backdrop-blur-lg"}>
+            <header className={"sticky top-0 bg-opacity-90 backdrop-blur-lg z-10"}>
                 <nav className={"container max-w-4xl mx-auto px-6 py-3 flex justify-between items-center"}>
                     <div className={"flex items-center gap-4"}>
                         <h1 className={"text-2xl font-bold"}>전상은</h1>
                         <p className={"text-sml text-gray-500"}>백엔드 개발자</p>
                     </div>
-                    <div className={"flex items-center gap-x-6"}>
+                    <div className={"hidden md:flex items-center gap-x-6"}>
                         <a href={"#home"} className={"hover:text-blue-500 transition-colors duration-300"}>홈</a>
                         <a href={"#about"} className={"hover:text-blue-500 transition-colors duration-300"}>소개</a>
                         <a href={"#skills"} className={"hover:text-blue-500 transition-colors duration-300"}>기술</a>
                         <a href={"#project"} className={"hover:text-blue-500 transition-colors duration-300"}>프로젝트</a>
                         <a href={"#contact"} className={"hover:text-blue-500 transition-colors duration-300"}>연락처</a>
-                        {/* Dark Mode Button */}
+                        {/* Dark Mode Toggle */}
                         <button
                             onClick={toggleDarkMode}
                             className={
@@ -59,19 +62,59 @@ export default function Portfolio() {
                             )}
                         </button>
                     </div>
+                    {/* Menu Open Toggle */}
+                    <button id={"menuToggle"} onClick={toggleMenu} className={"md:hidden p-2 text-gray-700 dark:text-white"}>
+                        <i className={"fas fa-bars text-2xl"}></i>
+                    </button>
                 </nav>
             </header>
+
+            {/* Menu Side Bar(Mobile) */}
+            <aside
+                className={
+                    "block md:hidden fixed right-0 inset-y-0 w-64 bg-white dark:bg-gray-800 shadow-lg "
+                    + (menuOpen ? "translate-x-0" : "translate-x-full") + " transition-transform duration-300 z-20"
+                }
+            >
+                {/* Menu Close Toggle */}
+                <button id={"closeMenu"} onClick={toggleMenu} className={"p-2 mx-[15px] my-[14px] text-gray-700 dark:text-white"}>
+                    <i className={"fa fa-times text-2xl"}></i>
+                </button>
+                <nav className={"flex flex-col gap-4 px-6"}>
+                    <a href={"#home"} className={"hover:text-blue-500 transition-colors duration-300"}>홈</a>
+                    <a href={"#about"} className={"hover:text-blue-500 transition-colors duration-300"}>소개</a>
+                    <a href={"#skills"} className={"hover:text-blue-500 transition-colors duration-300"}>기술</a>
+                    <a href={"#project"} className={"hover:text-blue-500 transition-colors duration-300"}>프로젝트</a>
+                    <a href={"#contact"} className={"hover:text-blue-500 transition-colors duration-300"}>연락처</a>
+                    {/* Dark Mode Toggle(Mobile)*/}
+                    <button
+                        onClick={toggleDarkMode}
+                        className={
+                            "p-2 mt-2 w-full rounded-full bg-gray-200 dark:bg-gray-700 " +
+                            "focus:outline-none focus:outline-2 focus:ring focus:ring-gray-500 dark:focus:ring-gray-600 " +
+                            "hover:scale-110 transition-transform duration-300"
+                        }
+                    >
+                        {isDark ? (
+                            <i className={"fas fa-sun text-2xl dark:text-yellow-400"}></i>
+                        ) : (
+                            <i className={"fas fa-moon text-2xl"}></i>
+                        )}
+                    </button>
+                </nav>
+            </aside>
+
             <main className={"max-w-4xl mx-auto px-6 py-12"}>
                 {/* Home Section */}
-                <section id="home" className={"flex justify-between items-center mb-12"}>
-                    <div className={"shrink-0 mr-10"}>
+                <section id="home" className={"flex flex-col md:flex-row justify-between items-center mb-12"}>
+                    <div className={"shrink-0 mb-6 md:mb-0 md:mr-10"}>
                         <img
                             className={"w-48 h-48 rounded-full border-2 object-cover hover:scale-105 transition-transform duration-300"}
                             src="https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=Brian"
                             alt="avatar"
                         />
                     </div>
-                    <div className={"text-right"}>
+                    <div className={"text-center md:text-right"}>
                         <h1 className={"text-4xl font-bold mb-2"}>
                             전상은
                         </h1>
@@ -87,7 +130,7 @@ export default function Portfolio() {
                 {/* About Section */}
                 <section id="about" className={"mb-16"}>
                     <h2 className={"text-3xl font-bold mb-6"}>소개</h2>
-                    <div className={"grid grid-cols-2 gap-6"}>
+                    <div className={"grid grid-cols-1 md:grid-cols-2 gap-6"}>
                         <article className={"p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md hover:scale-105 transition-transform duration-300"}>
                             <h3 className={"text-xl font-semibold mb-1"}>🏢경력</h3>
                             <ul className={"text-gray-800 dark:text-gray-300 leading-relaxed"}>
@@ -121,7 +164,7 @@ export default function Portfolio() {
                 {/* Skills Section */}
                 <section id={"skills"} className={"mb-16"}>
                     <h2 className={"text-3xl font-bold mb-6"}>기술</h2>
-                    <div className={"grid grid-cols-3 gap-4"}>
+                    <div className={"grid grid-cols-2 md:grid-cols-3 gap-4"}>
                         <div
                             className={"flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md hover:scale-105 transition-transform duration-300"}>
                             <i className="fa-brands fa-java text-4xl"></i>
@@ -141,7 +184,7 @@ export default function Portfolio() {
                 {/* Project Section */}
                 <section id={"project"} className={"mb-16"}>
                     <h2 className={"text-3xl font-bold mb-6"}>프로젝트</h2>
-                    <div className={"grid grid-cols-2 gap-6"}>
+                    <div className={"grid grid-cols-1 md:grid-cols-2 gap-6"}>
                         {[...Array(4)].map((_, idx) => (
                             <article key={idx} className={"bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300"}>
                                 <img
@@ -171,7 +214,7 @@ export default function Portfolio() {
                 {/* Contact Section */}
                 <section id={"contact"} className={""}>
                     <h2 className={"text-3xl font-bold mb-6"}>연락처</h2>
-                    <div className={"grid grid-cols-2 gap-8"}>
+                    <div className={"grid grid-cols-1 md:grid-cols-2 gap-8"}>
                         <form id={"contactForm"} className={"space-y-4"}>
                             <div>
                                 <label htmlFor={"name"} className={"block mb-1 font-medium"}>이름</label>
